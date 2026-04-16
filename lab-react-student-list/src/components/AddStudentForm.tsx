@@ -1,0 +1,95 @@
+import { useState } from "react";
+
+interface AddStudentFormProps {
+  onAddStudent: (student: any) => void;
+}
+
+function AddStudentForm({ onAddStudent }: AddStudentFormProps) {
+  // 1. Definimos un estado para cada input
+  const [fullName, setFullName] = useState("");
+  const [image, setImage] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [program, setProgram] = useState("");
+  const [graduated, setGraduated] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const newStudent = {
+      _id: crypto.randomUUID(),
+      fullName,
+      image,
+      phone,
+      email,
+      program,
+      graduated
+    };
+
+    onAddStudent(newStudent);
+
+    setFullName("");
+    setImage("");
+    setPhone("");
+    setEmail("");
+    setProgram("");
+    setGraduated(false);
+  };
+
+  return (
+    <section className="form-container">
+      <form onSubmit={handleSubmit}>
+        <span>Add Student</span>
+        <div>
+          <label>Full Name
+            <input name="fullName" type="text" placeholder="Full Name" 
+                   value={fullName} onChange={(e) => setFullName(e.target.value)} required />
+          </label>
+
+          <label>Image
+            <input name="image" type="url" placeholder="Image" 
+                   value={image} onChange={(e) => setImage(e.target.value)} required />
+          </label>
+
+          <label>Phone
+            <input name="phone" type="tel" placeholder="Phone" 
+                   value={phone} onChange={(e) => setPhone(e.target.value)} required />
+          </label>
+
+          <label>Email
+            <input name="email" type="email" placeholder="Email" 
+                   value={email} onChange={(e) => setEmail(e.target.value)} required />
+          </label>
+        </div>
+
+        <div>
+          <label>Program
+            <select name="program" value={program} onChange={(e) => setProgram(e.target.value)} required>
+              <option value="">-- None --</option>
+              <option value="Web Dev">Web Dev</option>
+              <option value="UX/UI">UX/UI</option>
+              <option value="Data">Data</option>
+            </select>
+          </label>
+
+        <div className="checkbox-group">
+            <label className="checkbox-container">
+                <input 
+                name="graduated" 
+                type="checkbox" 
+                checked={graduated} 
+                onChange={(e) => setGraduated(e.target.checked)} 
+                />
+                <span className="checkmark"></span>
+                <span className="label-text">Graduated</span>
+            </label>
+        </div>
+
+          <button type="submit">Add Student</button>
+        </div>
+      </form>
+    </section>
+  );
+}
+
+export default AddStudentForm;
