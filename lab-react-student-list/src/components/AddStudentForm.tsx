@@ -1,4 +1,6 @@
 import { useState } from "react";
+//preguntar por FormEvent
+
 
 interface AddStudentFormProps {
   onAddStudent: (student: any) => void;
@@ -13,7 +15,7 @@ function AddStudentForm({ onAddStudent }: AddStudentFormProps) {
   const [program, setProgram] = useState("");
   const [graduated, setGraduated] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
 
     const newStudent = {
@@ -25,7 +27,8 @@ function AddStudentForm({ onAddStudent }: AddStudentFormProps) {
       program,
       graduated
     };
-
+    
+    //limpiar formulario
     onAddStudent(newStudent);
 
     setFullName("");
@@ -36,30 +39,32 @@ function AddStudentForm({ onAddStudent }: AddStudentFormProps) {
     setGraduated(false);
   };
 
+  //Obtenemos formulario
   return (
     <section className="form-container">
       <form onSubmit={handleSubmit}>
         <span>Add Student</span>
         <div>
-          <label>Full Name
+          <label>
             <input name="fullName" type="text" placeholder="Full Name" 
                    value={fullName} onChange={(e) => setFullName(e.target.value)} required />
           </label>
 
-          <label>Image
+          <label>
             <input name="image" type="url" placeholder="Image" 
                    value={image} onChange={(e) => setImage(e.target.value)} required />
           </label>
+          <div className="phone-email-group">
+            <label>
+              <input name="phone" type="tel" placeholder="Phone" 
+                    value={phone} onChange={(e) => setPhone(e.target.value)} required />
+            </label>
 
-          <label>Phone
-            <input name="phone" type="tel" placeholder="Phone" 
-                   value={phone} onChange={(e) => setPhone(e.target.value)} required />
-          </label>
-
-          <label>Email
-            <input name="email" type="email" placeholder="Email" 
-                   value={email} onChange={(e) => setEmail(e.target.value)} required />
-          </label>
+            <label>
+              <input name="email" type="email" placeholder="Email" 
+                    value={email} onChange={(e) => setEmail(e.target.value)} required />
+            </label>
+            </div>
         </div>
 
         <div>
@@ -72,20 +77,23 @@ function AddStudentForm({ onAddStudent }: AddStudentFormProps) {
             </select>
           </label>
 
-        <div className="checkbox-group">
+          <div className="checkbox-group">
             <label className="checkbox-container">
-                <input 
-                name="graduated" 
-                type="checkbox" 
-                checked={graduated} 
-                onChange={(e) => setGraduated(e.target.checked)} 
-                />
+              <span className="label-text">Graduated</span>
+              <input 
+              name="graduated" 
+              type="checkbox" 
+              checked={graduated} 
+              onChange={(e) => setGraduated(e.target.checked)} 
+              />
+              <div className= "gratuated-box">
                 <span className="checkmark"></span>
-                <span className="label-text">Graduated</span>
+              </div>
             </label>
-        </div>
-
-          <button type="submit">Add Student</button>
+            <button className="button-container" type="submit">Add Student</button>
+          </div>
+          
+          
         </div>
       </form>
     </section>

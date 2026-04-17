@@ -26,8 +26,6 @@ function App() {
     <div className="App">
       <h1>Student List Manager</h1>
 
-      <AddStudentForm onAddStudent={addStudent} />
-
       <div className="student-list">
           {students.map((student) => (
               <div key={student._id} className="student-card">
@@ -40,6 +38,7 @@ function App() {
               </div>
           ))}
       </div>
+      <AddStudentForm onAddStudent={addStudent} />
     </div>
   );
 }

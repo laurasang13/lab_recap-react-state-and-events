@@ -1,12 +1,18 @@
-#root {
+#root{
   background-color: #f9f7f2;
   min-height: 100vh;
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-family: Arial, sans-serif;
 }
 
+
 .App {
+  width: 100%;
+  max-width: 1200px; 
   padding: 40px 20px;
+  box-sizing: border-box;
 }
 
 h1 {
@@ -23,6 +29,7 @@ h1 {
   margin: 0 auto 50px auto;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
   border: 1px solid #f0f0f0;
+  box-sizing: border-box;
 }
 
 .form-container span {
@@ -34,7 +41,12 @@ h1 {
   text-align: center;
 }
 
-.form-container form div {
+.form-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.phone-email-group {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
@@ -49,6 +61,11 @@ h1 {
   font-weight: 600;
   color: #555;
   gap: 8px;
+  margin-bottom: 20px;
+}
+
+.phone-email-group label {
+  margin-bottom: 0;
 }
 
 .form-container input:not([type="checkbox"]), 
@@ -60,23 +77,21 @@ h1 {
   background-color: #fff;
 }
 
-.form-container button[type="submit"] {
-  background-color: #646cff;
-  color: white;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  width: 100%;
-}
-
 .checkbox-group {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.checkbox-group .label-text {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .checkbox-container {
@@ -85,16 +100,19 @@ h1 {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  gap: 12px;
+  gap: 8px;
   user-select: none;
+  position: relative;
 }
 
 .checkbox-container input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
-  height: 0;
-  width: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  margin: 0;
 }
 
 .checkmark {
@@ -107,17 +125,19 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .checkbox-container:hover input ~ .checkmark {
   background-color: #f0f0ff;
 }
 
-.checkbox-container input:checked ~ .checkmark {
+.checkbox-container input:checked ~ .gratuated-box .checkmark {
   background-color: #646cff;
 }
 
-.checkmark:after {
+/*.checkmark:after {
   content: "";
   display: none;
   width: 6px;
@@ -130,14 +150,24 @@ h1 {
 
 .checkbox-container input:checked ~ .checkmark:after {
   display: block;
+}*/
+
+
+.form-container button[type="submit"] {
+  background-color: #646cff;
+  color: white;
+  padding: 12px 40px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  width: auto;
+  transition: background 0.2s;
 }
 
-.label-text {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #333;
-  margin: 0;
-  text-align: center;
+.form-container button[type="submit"]:hover {
+  background-color: #535bf2;
 }
 
 .student-list {
